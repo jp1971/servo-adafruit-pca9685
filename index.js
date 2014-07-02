@@ -183,14 +183,14 @@ servoController.prototype.move = function (index, val, callback) {
   /**
   Args
     index
-      Index of the servo. NOTE: servos are 1-indexed
+      Index of the servo. NOTE: Adafruit servos are 0-indexed as opposed to Tessel servos which are 1-indexed
     val
       Position to which the the servo is to move. 0-1 of its full scale.
     callback
       Callback
   */
-  if (index < 1 || index > 16) {
-    throw 'Servos are 1-indexed. Servos can be between 1-16.';
+  if (index < 0 || index > 15) {
+    throw 'Servos are 0-indexed. Servos can be between 0-15.';
   }
 
   //  If unconfigured, use the controller's default values
@@ -231,10 +231,10 @@ servoController.prototype.read = function (servo, callback) {
   }
 
   var self = this;
-  var registers = [LED0_ON_L + (servo - 1) * 4,
-    LED0_ON_H + (servo - 1) * 4,
-    LED0_OFF_L + (servo - 1) * 4,
-    LED0_OFF_H + (servo - 1) * 4];
+  var registers = [LED0_ON_L + (servo) * 4,
+    LED0_ON_H + (servo) * 4,
+    LED0_OFF_L + (servo) * 4,
+    LED0_OFF_H + (servo) * 4];
   self._chainRead(registers, function(err, replies) {
     //  When in the count cycle the pin goes high
     var on = replies[0] + (replies[1] << 8);
@@ -271,10 +271,10 @@ servoController.prototype.setDutyCycle = function (index, on, callback) {
   var convertOff = Math.floor(MAX * on);
 
   // Set up writes
-  var registers = [LED0_ON_L + (index - 1) * 4,
-    LED0_ON_H + (index - 1) * 4,
-    LED0_OFF_L + (index - 1) * 4,
-    LED0_OFF_H + (index - 1) * 4];
+  var registers = [LED0_ON_L + (index) * 4,
+    LED0_ON_H + (index) * 4,
+    LED0_OFF_L + (index) * 4,
+    LED0_OFF_H + (index) * 4];
   var data = [convertOn,
     convertOn >> 8,
     convertOff,
