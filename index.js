@@ -11,7 +11,7 @@ var events = require('events');
 var util = require('util');
 
 // I2C Configuration
-var I2C_ADDRESS = 0x73;
+var I2C_ADDRESS = 0x40;
 var LED0_ON_L = 0x06;
 var LED0_ON_H = 0x07;
 var LED0_OFF_L = 0x08;
