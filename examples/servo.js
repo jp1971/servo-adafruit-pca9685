@@ -9,9 +9,9 @@ to the console at each movement.
 *********************************************/
 
 var tessel = require('tessel');
-var servolib = require('../'); // Replace '../' with 'servo-pca9685' in your own code
+var servolib = require('../'); // Replace '../' with 'servo-adafruit-pca9685' in your own code
 
-var servo = servolib.use(tessel.port['A']);
+var servo = servolib.use(tessel.port['GPIO']);
 
 var servo1 = 1; // We have a servo plugged in at position 1
 
