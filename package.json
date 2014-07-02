@@ -1,13 +1,13 @@
 {
-  "name": "servo-pca9685",
+  "name": "servo-adafruit-pca9685",
   "version": "0.1.2",
   "description": "Library to run the PCA9685 PWM driver.",
   "main": "index.js",
   "scripts": {
     "test": "tinytap -e 'tessel run {} ${SERVO_PORT}' test/*.js"
   },
-  "repository": "tessel/servo-pca9685",
-  "author": "Jia Huang <jia@technical.io>",
+  "repository": "jp1971/servo-adafruit-pca9685",
+  "author": "JP1971 <jameson@jp1971.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
   "directories": {
