@@ -261,8 +261,8 @@ servoController.prototype.setDutyCycle = function (index, on, callback) {
       Callback
   */
 
-  if (index < 1 || index > 16) {
-    throw 'Servos are 1-indexed. Servos can be between 1-16.';
+  if (index < 0 || index > 15) {
+    throw 'Servos are 0-indexed. Servos can be between 0-15.';
   }
 
   var convertOn = 0;

@@ -19,11 +19,11 @@ your way out from the starting point slowly.
 *********************************************/
 
 var tessel = require('tessel');
-var servolib = require('../'); // Or 'servo-pca9685' in your own code
+var servolib = require('../'); // Or 'servo-adafruit-pca9685' in your own code
 
 var servo = servolib.use(tessel.port['GPIO']);
 
-var servoNumber = 1; // Plug your servo or motor controller into port 1
+var servoNumber = 0; // Plug your servo or motor controller into port 0
 
 // Reenable the console
 process.stdin.resume();
