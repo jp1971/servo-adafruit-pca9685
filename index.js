@@ -1,10 +1,8 @@
-// Copyright 2014 Technical Machine, Inc. See the COPYRIGHT
-// file at the top-level directory of this distribution.
+// Copyright 2014 JP1971
+// Original Copyright 2014 Technical Machine, Inc.
 //
-// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
-// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
-// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
-// option. This file may not be copied, modified, or distributed
+// Licensed under the MIT license.
+// This file may not be copied, modified, or distributed
 // except according to those terms.
 
 var events = require('events');
