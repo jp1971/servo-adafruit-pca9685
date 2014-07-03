@@ -23,7 +23,7 @@
   "keywords": [
     "tessel",
     "servo",
-    "pca9685"
-  ],
-  "gitHead": "817db128bd7934a99c3d412b725712008def9931"
+    "pca9685",
+    "adafruit"
+  ]
 }
