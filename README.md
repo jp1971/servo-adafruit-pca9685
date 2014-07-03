@@ -1,51 +1,11 @@
 #Servo
-Driver for the servo-pca9685 Tessel servo module, capable of driving up to 16 servos at once. Can also be used to drive other devices which accept a 3.3 V PWM signal (most motor controllers, LEDs, gate drivers, etc.). The hardware documentation for this module can be found [here](https://github.com/tessel/hardware/blob/master/modules-overview.md#servo).
+JavaScript library for running the [Adafruit 16-Channel 12-bit PWM/Servo Driver](http://www.adafruit.com/product/815) with the [Tessel](http://tessel.io). The Adafruit 16-Channel 12-bit PWM/Servo Driver is capable of driving up to 16 servos at once.
 
-If you run into any issues you can ask for support on the [Servo Module Forums](http://forums.tessel.io/category/servo).
+This code was forked from the [tessel/servo-pca9685 repository](https://github.com/tessel/servo-pca9685) which contains a library for running the servo-pca9685 Tessel servo module. This module also uses the [NXP PCA9685](http://www.adafruit.com/datasheets/PCA9685.pdf) 16-channel, 12-bit PWM Fm+ I2C-bus LED controller. As result, only minor modifications to the original repository were needed to get it working with the Adafruit 16-Channel 12-bit PWM/Servo Driver.
 
 ###Installation
 ```sh
-npm install servo-pca9685
-```
-
-###Example
-```js
-/*********************************************
-This servo module demo turns the servo around
-1/10 of its full rotation  every 500ms, then
-resets it after 10 turns, reading out position
-to the console at each movement.
-*********************************************/
-
-var tessel = require('tessel');
-var servolib = require('servo-pca9685'); 
-
-var servo = servolib.use(tessel.port['A']);
-
-var servo1 = 1; // We have a servo plugged in at position 1
-
-servo.on('ready', function () {
-  var position = 0;  //  Target position of the servo between 0 (min) and 1 (max).
-
-  //  Set the minimum and maximum duty cycle for servo 1.
-  //  If the servo doesn't move to its full extent or stalls out
-  //  and gets hot, try tuning these values (0.05 and 0.12).
-  //  Moving them towards each other = less movement range
-  //  Moving them apart = more range, more likely to stall and burn out
-  servo.configure(servo1, 0.05, 0.12, function () {
-    setInterval(function () {
-      console.log('Position (in range 0-1):', position);
-      //  Set servo #1 to position pos.
-      servo.move(servo1, position);
-
-      // Increment by 10% (~18 deg for a normal servo)
-      position += 0.1;
-      if (position > 1) {
-        position = 0; // Reset servo position
-      }
-    }, 500); // Every 500 milliseconds
-  });
-});
+npm install servo-adafruit-pca9685
 ```
 
 ###Methods
@@ -64,11 +24,13 @@ servo.on('ready', function () {
 
 &#x20;<a href="#api-servo-on-ready-callback-Emitted-upon-first-successful-communication-between-the-Tessel-and-the-module" name="api-servo-on-ready-callback-Emitted-upon-first-successful-communication-between-the-Tessel-and-the-module">#</a> servo<b>.on</b>( 'ready', callback() ) Emitted upon first successful communication between the Tessel and the module.  
 
-###Hardware/Advanced usage
-*  The servos used in conjunction with this module should be powered through the 5.5 mm barrel jack.
-*  The physical *module* is marked with "S", "+", and "-". These correspond to signal, power, and GND. On most *servos*, the GND wire will be black/brown and the signal wire will be yellow/white. Red typically denotes 5 V power.
-*  This module can be used to drive most speed controllers, which in turn can control a wide variety of actuators. It can also be used to drive small LEDs with current limiting resistors in series.
-*  The bare square pads by the barrel jack allow the addition of a capacitor to the input power rail if desired. The pad closest to the board edge is connected to GND, the other to the barrel jack's positive pin. This addition is not required for proper module functionality.
+###Wiring
+The Adafruit 16-Channel 12-bit PWM/Servo Driver cannot be plugged directly into a port like the Tessel servo module. Instead, it will need to be wired from the GPIO port. The pinout for the Tessel GPIO can be found [here](https://tessel.io/docs/hardware#pins-and-ports). Wiring is very straightforward:
+
+* Tessel GPIO Pin 1 GND to Adafruit GND
+* Tessel GPIO Pin 3 3V3 to Adafruit VCC
+* Tessel GPIO Pin 5 SCL to Adafruit SCL
+* Tessel GPIO Pin 7 SDA to Adafruit SDA
 
 ###License
-MIT or Apache 2.0, at your option
+MIT
